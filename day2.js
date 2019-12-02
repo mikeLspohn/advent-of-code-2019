@@ -2,7 +2,7 @@ const fs = require('fs')
 const file = fs.readFileSync("./day2input.txt", "utf8")
 const csvArray = file.split(',')
 
-// pt. 1
+/* PART 1 */
 const parsedArray = csvArray.map(i => parseInt(i))
 
 const calculateAnswer = (num1, num2) => {
@@ -34,9 +34,30 @@ const calculateAnswer = (num1, num2) => {
 const answer = calculateAnswer(12, 2)
 console.log('Answer pt.1 ', answer) // 4090689
 
-// pt. 2
+
+
+
+
+
+/* PART 2 */
 const arrayOf99 = Array(99).fill('i').map((val, i) => i)
 
+// build array of possible noun/verb paris (e.g. [[0, 0], [0, 1], [1, 0], [1,1]] etc.)
+const possibleGuesses = arrayOf99.map(num => {
+  return arrayOf99.map(innerNum => {
+    return [num, innerNum]
+  })
+}).flat()
+
+const [noun, verb] = possibleGuesses.find(([noun, verb], i) => {
+  return calculateAnswer(noun, verb) === 19690720
+})
+
+const answer2 = 100 * noun + verb
+console.log('Answer pt.2 ', answer2)
+
+
+/* using for..of loop
 let noun;
 let verb;
 
@@ -51,4 +72,4 @@ for(const [i, val] of arrayOf99.entries()) {
 
 const answer2 = 100 * noun + verb
 console.log('Answer pt.2 ', answer2) // 7733
-
+*/

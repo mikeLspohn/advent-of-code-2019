@@ -20,6 +20,7 @@ const answer2 = inputLines.reduce((acc, line) => {
   let currentFuelForLine = fuelForLine
   let totalFuelForLine = fuelForLine
 
+  // recursively get and add up extra fuel for each fuel item
   while (currentFuelForLine > 0) {
     const fuel = calculateFuel(currentFuelForLine)
     if (fuel > 0) {
